@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    height: var(--header-height);
+    color: var(--text-color);
+    background-color: var(--header-background-color);
+    box-shadow: #ccc 0 0.5px 8px;
+}
+
+.inner {
+    height: 100%;
+    width: var(--default-layout-width);
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shopName {
+    font-size: 3.2rem;
+    line-height: 32px;
+    text-shadow: #aaa 3px 3px 5px;
+}

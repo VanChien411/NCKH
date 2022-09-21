@@ -1,0 +1,25 @@
+.container {
+    min-height: calc(100vh - 56px);
+    padding: 10px;
+}
+
+.inner {
+    margin: auto;
+}
+
+.form {
+    padding: 5px 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    > div {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+.content {
+    margin-top: 10px;
+}

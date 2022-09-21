@@ -1,0 +1,50 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+:root {
+    // color
+    // --text-color: #f0f6fc;
+    --background-color: #f0f2f5;
+    --header-background-color: #fff;
+    --section-background-color: #fff;
+
+    // button
+    --btn-border-color: #606266;
+    --btn-hover-color: rgba(96, 98, 102, 0.05);
+
+    // Layout
+    --header-height: 56px;
+    --default-layout-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: 'QuickSand', sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+button,
+input {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+a[href] {
+    color: var(--text-color);
+    text-decoration: none;
+}

@@ -1,0 +1,30 @@
+.wrapper {
+    padding: 6px 15px;
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    &:not(.noHover):hover {
+        background-color: var(--btn-hover-color);
+    }
+}
+
+// button types
+.outline {
+    border: 1px solid;
+    border-color: var(--btn-border-color);
+}
+
+.rounded {
+    border-radius: 9999px;
+}
+
+// size
+.large {
+    font-size: 2rem;
+}
