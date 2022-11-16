@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { checkRegister} from '../../router/userRoter';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions';
+import ButtonAccess from "./buttonAccess";
 
-function Register () {
+function Register (props) {
    
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Yêu cầu tên người dùng!'),
@@ -45,18 +49,20 @@ function Register () {
                                     <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                         <div className="card-body p-4 p-lg-5 text-black">
     
-                                            <form  onSubmit={handleSubmit((d) => console.log(d))}>
+                                            <form  onSubmit={handleSubmit((d) => {checkRegister(d)
+                                                .then(sta => {props.addStatus(sta); console.log('register status',props.status); if(!sta)document.getElementById('error').innerHTML = 'Email đã tồn tại' })
+                                                .catch(errors =>{alert('errors login'+errors)}); })}>
     
                                                 <div className="d-flex align-items-center mb-3 pb-1">
                                                     <img src="image/logo.png" width={35} ></img>
                                                     <span className="h1 fw-bold mb-0 ">&ensp;Quản lý tài chính</span>
                                                 </div>
     
-                                                <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>Đăng ký</h5>
+                                                <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>Đăng ký<span className="small mx-4" style={{color :'red'}} name='error' id='error'></span></h5>
                                               
                                                 <div class="form-floating mb-4" style={errors.username?{color:'red'}:{}}>
-                                                    <input type="password" {...register('username')} class="form-control" id="username" name ='username' placeholder="name" style={errors.username?{borderColor:'red'}:{}}/>
-                                                    <label for="password_Register">Họ Và Tên</label>
+                                                    <input type="text" {...register('username')} class="form-control" id="username" name ='username' placeholder="name" style={errors.username?{borderColor:'red'}:{}}/>
+                                                    <label for="username">Họ Và Tên</label>
                                                     <small ><p>&ensp;{errors.username?.message}</p></small>
                                                 </div>
                                                 <div class="form-floating mb-4" style={errors.email?{color:'red'}:{}}>
@@ -68,7 +74,7 @@ function Register () {
                                                     <input type="password" {...register('password')} class="form-control" id="password_Register" name ='password' placeholder="name@example.com" style={errors.password?{borderColor:'red'}:{}}/>
                                                     <label for="password_Register">Mật khẩu</label>
                                                     <small ><p>&ensp;{errors.password?.message}</p></small>
-                                                </div>
+                                                </div>                    
                                                 <div class="form-floating mb-4" style={errors.repassword?{color:'red'}:{}}>
                                                     <input type="password" {...register('repassword')} class="form-control" id="repassword_Register" name ='repassword' placeholder="name@example.com" style={errors.repassword?{borderColor:'red'}:{}}/>
                                                     <label for="password_Register">Nhập lại mật khẩu</label>
@@ -76,12 +82,7 @@ function Register () {
                                                 </div>
             
                                                 <div className="pt-1 mb-4">
-                                                    <button className="btn btn-dark btn-lg btn-block" type="submit">Đăng ký</button>
-                                                    <span style={{float:'right'}}>  <button className="btn btn-lg btn-block btn-outline-warning"  type="button">
-                                                        <img src="image/google.png" width={25}></img>
-                                                        Google</button>
-                                                  
-                                                    </span>
+                                                    <ButtonAccess value= 'Đăng ký' />
                                                    
                                                 </div>
     
@@ -105,4 +106,17 @@ function Register () {
 
 
 }
-export default Register;
+const mapStateToProps = state =>{
+    return {
+        status : state.status
+    }
+};
+const mapDispatchToProps = (dispatch, props) =>{
+    return {
+        addStatus : (status) =>{
+            dispatch(actions.status(status))
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Register);

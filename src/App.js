@@ -6,31 +6,48 @@ import { useState, useEffect, Component } from "react";
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
 
-class App extends Component {
-
-  render() {
-    useEffect = () => {
+function App(props){
   
-    
-      if (!this.props.status && window.location.pathname != '/login' && window.location.pathname != '/register')
-        window.location.assign('/login');
-      else if (this.props.status && (window.location.pathname == '/login' || window.location.pathname == '/register'))
-        window.location.assign('/home');
-      console.log('state app', this.props.status)
+
+  
+   
+    useEffect(() => {
+  
+      console.log('sta',props.status)
+      console.log(window.location.pathname)
+      console.log('dk', !props.status && window.location.pathname != '/login' && window.location.pathname != '/register')
+       console.log('dk2', props.status && (window.location.pathname != '/login') )
+       
+      if (!props.status && window.location.pathname != '/login' && window.location.pathname != '/register')
+        {
+          window.location.assign('/login');
+          
+            console.log('state app', props.status)
+        }
+        else if (props.status && (window.location.pathname == '/login' || window.location.pathname == '/register' || window.location.pathname == '/'))
+        {
+          console.log('home ', window.location.pathname)
+          window.location.assign('/home');
+        }
+     
+        function handleCredentialResponse(response) {
+          console.log("Encoded JWT ID token: " + response.credential);
+        }
+       
+         
       
-    }
-
-
+      },[])
 
     return (
       <Router>
-
+   
+    
         <Auth />
 
       </Router>
       //accectokon
     );
-  }
+  
 }
 
 

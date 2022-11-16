@@ -21,4 +21,11 @@ export const rememberLogin = (rememberLogin) =>{
     }
 }
 
+export const user = (user) =>{
+    return {
+        type: types.USER,
+        user
+    }
+}
+
 

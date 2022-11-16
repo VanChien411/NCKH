@@ -1,20 +1,27 @@
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
-import Navbar from './navbar';
-
+import Header from './header/header';
+import Body from './body/body';
+import React from 'react';
+import { Link } from 'react-router-dom';
 function Home(props){
   
+    console.log(props.status)
+    console.log('user',props.user)
+    console.log(window.location.pathname)
     return (
         <>
-        <Navbar />
-  
+ <Link></Link>
+        <Header />
+        <Body />
         </>
       
     );
 }
 const mapStateToProps = state =>{
     return {
-        status : state.status
+        status : state.status,
+        user: state.user
     }
 };
 const mapDispatchToProps = (dispatch, props) =>{
@@ -25,4 +32,4 @@ const mapDispatchToProps = (dispatch, props) =>{
     }
 }
 
-export default Home;
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
